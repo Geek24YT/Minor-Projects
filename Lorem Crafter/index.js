@@ -35,27 +35,58 @@ function displayLoremIpsum(size) {
 }
 
 // Adding event listener to copy button
+
+// copyButton.addEventListener('click', () => {
+//     const text = textSection.textContent;
+
+//     // Creating a temporary textarea to copy text to clipboard
+//     const textArea = document.createElement('textarea');
+//     textArea.value = text;
+//     textArea.style.position = 'fixed';
+//     textArea.style.top = 0;
+//     textArea.style.left = 0;
+//     textArea.style.opacity = 0;
+
+//     document.body.appendChild(textArea);
+//     textArea.select();
+//     document.execCommand('copy');
+//     document.body.removeChild(textArea);
+
+//     // Adding animation class to copy button
+//     copyButton.classList.add('fa-clipboard');
+//     copyButton.classList.remove('fa-copy');
+//     setTimeout(() => {
+//         copyButton.classList.remove('fa-clipboard');
+//         copyButton.classList.add('fa-copy');
+//     }, 500);
+// });
+
+
 copyButton.addEventListener('click', () => {
     const text = textSection.textContent;
 
-    // Creating a temporary textarea to copy text to clipboard
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.top = 0;
-    textArea.style.left = 0;
-    textArea.style.opacity = 0;
+    // Create a range object
+    const range = document.createRange();
+    
+    // Select the text content inside the div
+    range.selectNodeContents(textSection);
 
-    document.body.appendChild(textArea);
-    textArea.select();
+    // Add the selected range to the current selection
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    // Copy the selected text to the clipboard
     document.execCommand('copy');
-    document.body.removeChild(textArea);
+
+    // Clear the selection
+    selection.removeAllRanges();
 
     // Adding animation class to copy button
-    copyButton.classList.add('fa-clipboard');
+    copyButton.classList.add('fa-check');
     copyButton.classList.remove('fa-copy');
     setTimeout(() => {
-        copyButton.classList.remove('fa-clipboard');
+        copyButton.classList.remove('fa-check');
         copyButton.classList.add('fa-copy');
     }, 500);
 });
