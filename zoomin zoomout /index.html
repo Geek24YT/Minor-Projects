@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zoom Entire Webpage</title>
+    <style>
+      body {
+        transform-origin: 0 0;
+        transition: transform 0.3s ease;
+      }
+
+      .settings {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      button {
+        margin: 5px;
+        padding: 10px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="settings">
+      <button id="zoomIn">Zoom In</button>
+      <button id="zoomOut">Zoom Out</button>
+      <button id="resetZoom">Reset</button>
+    </div>
+
+    <h1>Welcome to Geek24</h1>
+    <p>
+      This is an example of zooming the entire webpage for accessibility
+      purposes.
+    </p>
+    <p>
+      Click the Zoom In, Zoom Out, or Reset buttons to change the scale of the
+      webpage.
+    </p>
+    <script>
+      let zoomLevel = 1;
+
+      const zoomInButton = document.getElementById("zoomIn");
+      const zoomOutButton = document.getElementById("zoomOut");
+      const resetButton = document.getElementById("resetZoom");
+
+      zoomInButton.addEventListener("click", () => {
+        zoomLevel += 0.1; //10% zoom
+        document.body.style.transform = `scale(${zoomLevel})`;
+      });
+
+      zoomOutButton.addEventListener("click", () => {
+        if (zoomLevel > 0.5) {
+          zoomLevel -= 0.1; //10% zoom -
+          document.body.style.transform = `scale(${zoomLevel})`;
+        }
+      });
+
+      resetButton.addEventListener("click", () => {
+        zoomLevel = 1;
+        document.body.style.transform = `scale(${zoomLevel})`;
+      });
+    </script>
+  </body>
+</html>
